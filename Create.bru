@@ -1,0 +1,48 @@
+meta {
+  name: Create
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8069/api/materials
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {"name":"Rin7","code":"R1237","material_type":"jeans","buy_price":100,"supplier_id":7}
+}
+
+tests {
+  test("Should create a new material > 100", function () {
+    const data = res.getBody(); // Ambil response body
+  
+    // 1. Pastikan status HTTP 201 (Created)
+    expect(res.getStatus()).to.equal(200);
+  
+    // 2. Pastikan response memiliki key "id" (menandakan data berhasil dibuat)
+    expect(data.result).to.have.property("id");
+  
+    // 3. Pastikan nama, kode, dan material_type sesuai dengan input
+    expect(data.result.name).to.equal(req.body.name);
+  });
+  
+  test("Should create a new material < 100", function () {
+    const data = res.getBody(); // Ambil response body
+  
+    // 1. Pastikan status HTTP 201 (Created)
+    expect(res.getStatus()).to.equal(200);
+  
+    // 2. Pastikan response memiliki key "id" (menandakan data berhasil dibuat)
+    expect(data.result).to.have.property("error");
+  
+    // 3. Pastikan nama, kode, dan material_type sesuai dengan input
+    expect(data.result.error).to.equal("Material buy price must be at least 100");
+  });
+  
+}

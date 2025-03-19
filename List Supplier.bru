@@ -1,0 +1,28 @@
+meta {
+  name: List Supplier
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8069/api/materials/supplier
+  body: none
+  auth: none
+}
+
+tests {
+  test("Should return a valid suppliers list", function () {
+    // Ambil response body
+    const data = res.getBody();
+  
+    // Pastikan status HTTP adalah 200
+    expect(res.getStatus()).to.equal(200);
+  
+    // Pastikan response memiliki key "suppliers"
+    expect(data).to.have.property("results");
+  
+    // 3. Pastikan "material_type" tidak kosong
+    expect(data.results.length).to.be.greaterThan(0);
+  
+  });
+}
