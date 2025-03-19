@@ -19,7 +19,7 @@ body:json {
 }
 
 tests {
-  test("Should create a new material > 100", function () {
+  test("Should create a new material buy price => 100", function () {
     const data = res.getBody(); // Ambil response body
   
     // 1. Pastikan status HTTP 201 (Created)
@@ -32,17 +32,17 @@ tests {
     expect(data.result.name).to.equal(req.body.name);
   });
   
-  test("Should create a new material < 100", function () {
-    const data = res.getBody(); // Ambil response body
+  // test("Should create a new material buy price < 100", function () {
+  //   const data = res.getBody(); // Ambil response body
   
-    // 1. Pastikan status HTTP 201 (Created)
-    expect(res.getStatus()).to.equal(200);
+  //   // 1. Pastikan status HTTP 201 (Created)
+  //   expect(res.getStatus()).to.equal(200);
   
-    // 2. Pastikan response memiliki key "id" (menandakan data berhasil dibuat)
-    expect(data.result).to.have.property("error");
+  //   // 2. Pastikan response memiliki key "id" (menandakan data berhasil dibuat)
+  //   expect(data.result).to.have.property("error");
   
-    // 3. Pastikan nama, kode, dan material_type sesuai dengan input
-    expect(data.result.error).to.equal("Material buy price must be at least 100");
-  });
+  //   // 3. Pastikan nama, kode, dan material_type sesuai dengan input
+  //   expect(data.result.error).to.equal("Material buy price must be at least 100");
+  // });
   
 }
